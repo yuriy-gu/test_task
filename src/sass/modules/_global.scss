@@ -2,6 +2,7 @@
   margin: 0 auto;
   max-width: 1170px;
   position: relative;
+  @media only screen and (max-width : 1200px) { padding: 0 15px; }
 }
 .clearfix::after {
   clear: both;
