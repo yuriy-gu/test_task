@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js"></script>
+</head>
+<body>
+
+  <div class="q">
+    <p class="w">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia delectus reiciendis, repellat optio modi consequuntur temporibus. Aut placeat, praesentium vitae doloribus consequuntur quo recusandae, tenetur ab fugiat fugit porro culpa?</p>
+  </div>
+
+  <!-- ========img=========== -->
+  <section class="img__wrapper">
+    <div class="img__container"
+    data-title="Bacon"
+    data-description="Bacon ipsum dolor amet filet mignon alcatra short ribs, sausage shoulder tail biltong rump chicken ground round ham hock porchetta tri-tip. Boudin bresaola andouille, leberkas pork ball tip turducken beef ribs">
+    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/meat.jpg" alt="Meat">
+  </div>
+</section>
+
+<!-- ============COUNTER ==================== -->
+<h1>Selection CSS Counter</h1>
+<section class="characters">
+  <h2>Select characters:</h2>
+  <input id="b" type="checkbox"><label for="b">Relm</label>
+  <input id="c" type="checkbox"><label for="c">Mog</label>
+  <input id="e" type="checkbox"><label for="e">Celes</label>
+  <input id="g" type="checkbox"><label for="g">Edgar</label>
+  <input id="i" type="checkbox"><label for="i">Gau</label>
+  <input id="k" type="checkbox"><label for="k">Terra</label>
+  <input id="l" type="checkbox"><label for="l">Locke</label>
+  <input id="o" type="checkbox"><label for="o">Cyan</label>
+</section>
+<section class="total">
+  Total selected:
+</section>
+
+<!-- ==========Эффект замерзшего стелка=========== -->
+<div class="glassBg">
+  <article class='glass down'>
+    <h1 class='toggle' onclick='toggle()'>Pelican</h1>
+    <p class='unimportant'><em>Pel"i*can</em>, n. Etym: [F. p&eacute;lican, L. pelicanus, pelecanus, Gr. para&ccedil;u.] [Written also pelecan.] 1. (Zo&ouml;l.)</p>
+
+    <p><em>Defn:</em> Any large webfooted bird of the genus of Pelecanus, of which about a dozen species are known. They have an enormous bill, to the lower edge of which is attached a pouch in which captured fishes are temporarily stored.
+
+      <p class='unimportant'><em>Note:</em> The American white pelican (Pelecanus erythrorhynchos) and the brown species (P. fuscus) are abundant on the Florida coast in winter, but breed about the lakes in the Rocky Mountains and British America.</p>
+    </article>
+    <svg xmlns="http://www.w3.org/2000/svg"  version="1.1">
+
+    </div>
+    <br>
+
+<!-- ============ACCORDEON ==================== -->
+<div class="accordion vertical">
+    <ul>
+        <li>
+            <input type="checkbox" id="checkbox-1" name="checkbox-accordion" checked />
+            <label for="checkbox-1">Title&nbsp;One</label>
+            <div class="content">
+                <h4>This is an example accordion item</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec posuere lorem. Pellentesque hendrerit, lorem luctus porttitor vestibulum, eros sapien mattis libero, euismod congue neque nisi at ipsum. Mauris semper ipsum sit amet metus semper malesuada. Donec vel est justo, ac porta diam.</p>
+                <p>In ut est in orci commodo blandit. Cras rhoncus ultricies augue. Proin quam odio, venenatis ut tempus tristique, aliquet in velit. Pellentesque volutpat facilisis orci, ut congue mi rhoncus at. Nullam vehicula dignissim neque, sed rhoncus magna ultricies et.</p>
+            </div>
+        </li>
+        <li>
+            <input type="checkbox" id="checkbox-2" name="checkbox-accordion" />
+            <label for="checkbox-2">Title&nbsp;Two</label>
+            <div class="content">
+                <h4>Totally another one right here</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec posuere lorem. Pellentesque hendrerit, lorem luctus porttitor vestibulum, eros sapien mattis libero, euismod congue neque nisi at ipsum. Mauris semper ipsum sit amet metus semper malesuada. Donec vel est justo, ac porta diam.</p>
+                <p>In ut est in orci commodo blandit. Cras rhoncus ultricies augue. Proin quam odio, venenatis ut tempus tristique, aliquet in velit. Pellentesque volutpat facilisis orci, ut congue mi rhoncus at. Nullam vehicula dignissim neque, sed rhoncus magna ultricies et.</p>
+            </div>
+        </li>
+        <li>
+            <input type="checkbox" id="checkbox-3" name="checkbox-accordion" />
+            <label for="checkbox-3">Title&nbsp;Three</label>
+            <div class="content">
+                <h4>I think I can go on forever</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec posuere lorem. Pellentesque hendrerit, lorem luctus porttitor vestibulum, eros sapien mattis libero, euismod congue neque nisi at ipsum. Mauris semper ipsum sit amet metus semper malesuada. Donec vel est justo, ac porta diam.</p>
+                <p>In ut est in orci commodo blandit. Cras rhoncus ultricies augue. Proin quam odio, venenatis ut tempus tristique, aliquet in velit. Pellentesque volutpat facilisis orci, ut congue mi rhoncus at. Nullam vehicula dignissim neque, sed rhoncus magna ultricies et.</p>
+            </div>
+        </li>
+        <li>
+            <input type="checkbox" id="checkbox-4" name="checkbox-accordion" />
+            <label for="checkbox-4">Title&nbsp;Four</label>
+            <div class="content">
+                <h4>I was wrong, I'm done</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec posuere lorem. Pellentesque hendrerit, lorem luctus porttitor vestibulum, eros sapien mattis libero, euismod congue neque nisi at ipsum. Mauris semper ipsum sit amet metus semper malesuada. Donec vel est justo, ac porta diam.</p>
+                <p>In ut est in orci commodo blandit. Cras rhoncus ultricies augue. Proin quam odio, venenatis ut tempus tristique, aliquet in velit. Pellentesque volutpat facilisis orci, ut congue mi rhoncus at. Nullam vehicula dignissim neque, sed rhoncus magna ultricies et.</p>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<!-- ================= LETTERSS OAPCITY ==================== -->
+<div class="example typography-example typography-example-1">
+  <span>E</span><span>x</span><span>a</span><span>m</span><span>p</span><span>l</span><span>e</span>
+  <span>O</span><span>n</span><span>e</span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

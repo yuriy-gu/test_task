@@ -1,0 +1,302 @@
+/*на выходе: Lorem ipsum dolor sit amet, consectetur adi.....*/
+.q { display: inline;  width: 370px; }
+.w {
+  overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+width: 300px;
+}
+
+/* ===============IMG================= */
+*, *:after, *:before { box-sizing: border-box; }
+html { height: 100%; font-size: 62.5%; }
+body {
+    height: 100%;
+    font-family: Lato, sans-serif;
+    font-size: 1.8rem;
+    background: radial-gradient(ellipse at center, #f5f5f5 0%,#ddd 100%);
+}
+.img__wrapper { width: 300px; margin: 0 auto; }
+.img__container {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 15px 50px rgba(0,0,0,.5);
+}
+.img__container img { display: block; max-width: 100%; transition: opacity .2s ease-in-out; }
+.img__container:hover img { opacity: .5; }
+.img__container::after,
+.img__container::before {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 50%;
+    transition: transform .4s ease-out;
+    color: #fff;
+}
+.img__container::after {
+    content: attr(data-title);
+    top: 0;
+    padding-top: 55px;
+    transform: translateY(-100%) scale(.8);
+    background: rgba(0,0,0,.4);
+    font-size: 3.5rem;
+    text-align: center;
+}
+.img__container::before {
+    content: attr(data-description) "…";
+    top: 50%;
+    padding: 20px;
+    transform: translateY(100%) scale(.8);
+    background: rgba(107,38,68,.6);
+    color: #f1f1f1;
+    font-size: 1.5rem;
+}
+/* отвечает за transform при hover */
+.img__container:hover::after,
+.img__container:hover::before { transform: translateY(0%) scale(1); }
+
+
+
+/* =============== COUNTER ================= */
+/*counter-reset: characters; -- Устанавливает идентификатор, в котором будет храниться счётчик отображений
+ определенного элемента, а также начальное значение счётчика. Такой счётчик
+ может выводиться с помощью свойства content и псевдоэлементов :after и :before.*/
+body { counter-reset: characters; } /* инициализируем счётчик */
+
+.characters input:checked { counter-increment: characters; } /* инкрементируем счётчик */
+.total::after { content: counter(characters); } /* отображаем счётчик */
+.characters {
+  padding: 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, .1);
+}
+.characters input { position: absolute; left: -9999px; }/* styles for checkbox(its hidden) */
+.characters label {
+  float: left;
+  margin: 8px;
+  padding: 16px;
+  border-radius: 4px;
+  border: solid 2px rgba(255, 255, 255, .4);
+  background-color: rgba(255, 255, 255, .2);
+  cursor: pointer;
+  transition: all .1s;
+}
+.characters input:checked + label {
+  border: solid 2px #fff;
+  background-color: rgba(255, 255, 255, .4);
+  box-shadow: 0 0 10px #fff;
+}
+.total { padding: 16px 24px; }
+
+
+/* ==========Эффект замерзшего стекла============= */
+/* LAYOUT */
+article, .glass::before {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.glass { position: relative; }
+.glass::before {
+  z-index: -1;
+  display: block;
+  position: absolute;
+  content: ' ';
+}
+/* BACKGROUNDS */
+.glassBg {
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28727/pelican.jpg');
+  background-size: cover;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.glass::before {
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28727/pelican.jpg');
+  /* Prefix free isn't picking up this one */
+  -webkit-filter: url('#blur');
+  filter: url('#blur');
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  background-size: cover;
+  opacity: 0.4;
+}
+.glass { background-color: white; }
+/* TRANSFORMATIONS */
+.glass.down {
+  /* Fallback for browsers that don't support 3D Transforms */
+  transform: translateY(100%) translateY(-7rem);
+  transform: translateY(100%) translateY(-7rem) translateZ(0);
+}
+.glass.down::before {
+  transform: translateY(-100%) translateY(7rem);
+  transform: translateY(-100%) translateY(7rem) translateZ(0);
+}
+.glass.up, .glass.up::before {
+  transform: translateY(0);
+  transform: translateY(0) translateZ(0);
+}
+.glass, .glass::before {
+  transition: transform 0.5s ease-out;
+}
+/* TYPOGRAPHY, ETC */
+.glassBg h1 {
+  font-size: 5rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin-top: 10px;
+}
+/* ARROW */
+.glassBg h1::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28727/double-chevron-up.svg');
+  content: ' ';
+  display: block;
+  width: 7rem;
+  height: 7rem;
+  transition: transform 0.2s ease-out 0.5s;
+}
+/* rotate the arrow when its up */
+.up h1::before { transform: rotate(180deg); }
+p {
+  font-size: 1.8rem;
+  line-height: 1.4;
+  max-width: 30em;
+  margin: 1.4em auto;
+}
+@media (max-width: 500px), (max-height: 300px) {
+  p.unimportant { display: none; }
+  p { font-size: 1.4rem; margin: 0.5em auto; }
+}
+
+ /*=============== ACCORDEON =========================*/
+ .accordion {
+    font-family:Arial, Helvetica, sans-serif;
+    margin:0 auto;
+    font-size:14px;
+    border:1px solid #542437;
+    border-radius:10px;
+    width:100%;
+    padding:10px;
+    background:#fff;
+}
+.accordion ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+.accordion li {
+    margin:0;
+    padding:0;
+}
+.accordion [type=radio], .accordion [type=checkbox] {
+    display:none;
+}
+.accordion label {
+    display:block;
+    font-size:16px;
+    line-height:16px;
+    background:#D95B43;
+    border:1px solid #542437;
+    color:#542437;
+    text-shadow:1px 1px 1px rgba(255,255,255,0.3);
+    cursor:pointer;
+    text-transform:uppercase;
+}
+.accordion ul li label:hover, .accordion [type=radio]:checked ~ label, .accordion [type=checkbox]:checked ~ label {
+    background:#C02942;
+    color:#FFF;
+    text-shadow:1px 1px 1px rgba(0,0,0,0.5)
+}
+.accordion .content {
+    padding:0 10px;
+    overflow:hidden;
+    border:1px solid #fff;
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+}
+.accordion p {
+    color:#333;
+    margin:0 0 10px;
+}
+.accordion h4 {
+    color:#542437;
+    padding:0;
+    margin:10px 0;
+}
+
+.vertical ul li {
+    overflow:hidden;
+    margin:0 0 1px;
+}
+.vertical ul li label {
+    padding:10px;
+}
+.vertical [type=radio]:checked ~ label, .vertical [type=checkbox]:checked ~ label {
+    border-bottom:0;
+}
+.vertical ul li label:hover {
+    border:1px solid #542437;
+}
+.vertical ul li .content {
+    height:0px;
+    border-top:0;
+    transition: all .5s ease-out;
+}
+.vertical [type=checkbox]:checked ~ label ~ .content {
+    height:170px;
+    border:1px solid #542437;
+}
+
+/* ============== LETTERS OPACITY ===================== */
+.typography-example {
+  position: relative;
+  line-height: normal;
+  margin-bottom: 8rem;
+  font-family: Arial, sans-serif;
+}
+.typography-example::before {
+  content: "Hover to see transition";
+  text-transform: uppercase;
+  position: absolute;
+  top: .625rem;
+  left: .625rem;
+  font-size: .625rem;
+  letter-spacing: .1em;
+  transition: opacity 200ms;
+  transition-delay: 2000ms;
+}
+.typography-example:hover:before {
+  transition-delay: 0ms;
+  opacity: 0;
+}
+.typography-example-1 {
+  background-image: linear-gradient(135deg, #723362, #9d223c);
+  background-color: #9d223c;
+  color: #fff;
+  padding: 1em 0;
+  text-align: center;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: .4em;
+  padding-left: .4em;
+  font-size: 1.8em;
+  margin-top: 2.5rem
+}
+.typography-example-1 span { opacity: 0;  transition: opacity 1300ms }
+.typography-example-1 span:nth-child(1)  {  transition-delay:  200ms  }
+.typography-example-1 span:nth-child(2)  { transition-delay: 1200ms }
+.typography-example-1 span:nth-child(3)  { transition-delay:  800ms }
+.typography-example-1 span:nth-child(4)  {  transition-delay:  300ms }
+.typography-example-1 span:nth-child(5)  { transition-delay:  700ms }
+.typography-example-1 span:nth-child(6)  { transition-delay:  600ms }
+.typography-example-1 span:nth-child(7)  { transition-delay:  400ms }
+.typography-example-1 span:nth-child(8)  { transition-delay:  900ms }
+.typography-example-1 span:nth-child(9)  { transition-delay:  700ms }
+.typography-example-1 span:nth-child(10) { transition-delay:   50ms }
+.typography-example-1:hover span { opacity: 1}

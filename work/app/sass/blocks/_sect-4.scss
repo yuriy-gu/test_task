@@ -1,0 +1,8 @@
+.sect4 {
+  background: $sect4-bg;
+  &::before { background: url(../img/bah_3.png); }
+
+  .section-button { background: #d6d6d6; }
+
+}
+

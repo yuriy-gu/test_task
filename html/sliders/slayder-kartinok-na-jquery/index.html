@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="scroll.js"></script>
+
+<style type="text/css">
+	body {
+		background: #eee;
+		margin: 0; padding: 0;
+	}
+	#image-rotate {
+		width: 900px;
+		height: 300px;
+		overflow: hidden;
+		margin: 0px auto;
+		box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+		position: relative;
+		top: 100px;
+	}
+	#main-image {
+		width: 650px;
+		float: left;
+		position: relative;
+		height: 300px;
+		background: #343434;
+	}
+	#side-images {
+		float: left;
+		height: 300px;
+		position: relative;
+	}
+	
+	#side-images div[id^=image] {
+		height: 100px;
+		width: 250px;
+		overflow: hidden;
+		position: relative;
+		padding: 0;
+		z-index: 3000;
+	}
+	
+	#main-image div { display: none; position: absolute; }
+	#main-image img { display: block; }
+	#main-image span img { display: none; }
+	
+	#up-arrow, #down-arrow {
+		background: #343434;
+		cursor: pointer;
+		border-radius: 20px;
+		width: 26px;
+		height: 21px;
+		box-shadow: 0px 0px 20px rgba(255,255,255,1);
+		opacity: 0.8;
+		z-index: 5000;
+		text-align: center;
+		color: #fff;
+		left: 111px;
+		margin: 10px 0;
+		position: absolute;
+	}
+	
+	#up-arrow { top: 0; padding: 4px 0 0 0; }
+	#down-arrow { bottom: 0; padding: 6px 0 0 0; }
+	#side-images img { display: none; }
+	#side-images span img { display: block; }
+	#up-arrow img, #down-arrow img { display: inline; }
+	
+	#up-arrow:active, #down-arrow:active {
+ 		box-shadow: 0px 0px 5px rgba(255,255,255,1), inset 0px 0px 15px rgba(0,0,0,1);	
+	}
+	
+
+	#header {
+		background: #000;
+		padding: 20px;
+		color: #fff;
+	}
+	
+	#header a {
+		opacity: 1 !important;
+		color: #fff;
+		font-family: 'Myriad Pro', Helvetica, Arial, sans-serif;
+		font-size: 20px;
+		font-weight: bold;
+		text-decoration: none;
+	}
+	
+	#header img {
+		width: 150px;
+		height: 33px;
+		float: none;
+	}
+	
+	
+	#header .button {
+		text-decoration: none;
+		color: #fff;
+		font-weight: bold;
+		padding: 12px 20px;
+		font-size: 18px;
+		border-radius: 10px;
+		background-color: #666666;	
+		box-shadow: 0 5px 5px #313131, 0 2px 0 #393939, inset 0px 2px 9px rgba(255,255,255,0.2), inset 0 -2px 9px rgba(0,0,0,0.2);
+		position: relative;
+		border-bottom: 1px solid rgba(255,255,255,0.2);
+		display: inline-block;
+		float: right;
+		position: relative;
+		bottom: 5px;
+		text-shadow: 0px -1px 0px rgba(0,0,0,0.2);
+	}
+	
+	#header .button:hover {
+		box-shadow: 0 5px 5px #313131, 0 2px 0 #393939, 0px 9px 10px rgba(0,0,0,0.4), inset 0px 2px 15px rgba(255,255,255,0.4), inset 0 -2px 9px rgba(0,0,0,0.2);
+	}
+	
+	#header .blue {
+		background: #2a8ad8;
+		box-shadow: 0 2px 0 #25325e, inset 0px 2px 9px rgba(255,255,255,0.2), inset 0 -2px 9px rgba(0,0,0,0.2);
+	}
+	
+	#header .blue:hover {
+		box-shadow: 0 2px 0 #25325e, inset 0px 2px 15px rgba(255,255,255,0.4), inset 0 -2px 9px rgba(0,0,0,0.2);
+	}
+	#header .blue:active {
+		box-shadow: 0 2px 0 #25325e, 0px 4px 4px rgba(0,0,0,0.3), inset 0px 2px 5px rgba(0,0,0,0.2);
+	}
+
+</style>
+</head>
+<body>
+<div id="header">
+	<a href="http://www.inserthtml.com">Demo jQuery Slider</a>
+	<a class="button blue" href="http://sitear.ru">SiteAR.ru</a>
+</div>
+
+<div id="image-rotate">
+	<div id="main-image">
+	
+	</div>
+	<div id="side-images">
+		<div id="up-arrow"><img src="up.png" alt="" /></div>
+			
+			<div id="image-1"><a href="http://sitear.ru/material/script-slaidera-kartinok"><img src="1.jpg" alt="" /><span><img src="1s.jpg" alt="" /></span></a></div>
+			<div id="image-2"><a href="http://sitear.ru/material/mini-kurs-po-kopiraytingu-besplatnyy-kurs-kopiraytinga"><img src="2.jpg" alt="" /><span><img src="2s.jpg" alt="" /></span></a></div>
+			<div id="image-3"><a href="http://sitear.ru/material/17-css-html-alternativ-krossbrauzernoy-verstki"><img src="3.jpg" alt="" /><span><img src="3s.jpg" alt="" /></span></a></div>
+			<div id="image-4"><a href="http://sitear.ru/"><img src="4.jpg" alt="" /><span><img src="4s.jpg" alt="" /></span></a></div>
+			
+		<div id="down-arrow"><img src="down.png" alt="" /></div>
+	</div>
+</div>
+
+
+</body>

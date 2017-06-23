@@ -1,0 +1,54 @@
+.sect3 {
+  background: $sect3-bg;
+
+  &::before {
+    background: url(../img/bah_2.png);
+  }
+
+  .section-head {
+    h2 { color: #fff; }
+    p { color: #e5e5e5; }
+  }
+
+  .section-button { background: $sect3-bg; }
+
+  .section-content {
+    padding-bottom: 0;
+    padding-top: 60px;
+    overflow: hidden;
+    &::before {
+      content:'';
+      background: url(../img/s3_sun_bg.png) no-repeat top;
+      position: absolute;
+      top: 0; left: 50%;
+      margin-left: -425px;
+      min-width: 850px;
+      min-height: 850px;
+      animation: rotate infinite linear 40s;
+    }
+
+    .sect1-item {
+      margin: 65px auto;
+      p { color: #fff; }
+    }
+
+    .sect1-item-wrap:nth-child(2) .sect1-item { margin-top: -40px; }
+    .sect1-item-wrap:nth-child(4) .sect1-item { margin-left: -60px; }
+    .sect1-item-wrap:nth-child(6) .sect1-item { margin-right: -60px; }
+    .sect1-item-wrap:nth-child(8) .sect1-item { margin-top: 180px; }
+  }
+
+.s3-img-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+  .s3-img {
+    background: $main-color;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    img { width: 70px; margin: 30px 0 0 5px; }
+  }
+}
