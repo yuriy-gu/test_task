@@ -1,0 +1,217 @@
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+	.header .top-line p { font-size: 1.25rem; }
+
+	.header-nav .main-nav .nav-link:nth-child(2) { margin-right: 50px; }
+
+	.art2 {
+		h2, p { padding: 0 15px; }
+	}
+
+	.nav-food h2 { padding: 0 15px; }
+
+	.footer {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+}
+
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px){
+	.header { display: none; }
+
+	.header-nav {
+		top: 0;
+		.logo {
+			padding-top: 30px;
+			&::after { display: none; }
+		}
+
+		#hamburger-icon { display: inline-block;}
+
+		.main-nav {
+			display: flex;
+ 			flex-direction: column;
+ 			position: absolute;
+ 			top: 0;
+ 			left: -2000px;
+			padding-top: 70px;
+			padding-bottom: 20px;
+			text-align: center;
+			width: 300px;
+			transition: .3s ease-out;
+			a { font-size: 1.125rem !important; }
+			.nav-link {
+				height: 30px;
+				line-height: 30px;
+				float: none;
+				margin: 10px 20px !important; }
+			.nav-link:nth-child(1) { margin-left: 20px; }
+		}
+	}
+
+	.art2 { padding: 0; }
+	.art2-slider .slick-arrow { display: none !important; }
+
+	.food-slider button { display: none; }
+
+	.nav-food .food-content {
+		padding: 0 15px;
+		img {
+			float: none;
+			margin-bottom: 15px;
+			width: 100%;
+			height: 400px;
+		}
+	}
+
+	.art3 { margin-top: 0px; }
+
+	.footer {
+		.footer-address,
+ 		.footer-phone,
+ 		.footer-social {
+ 		 		p { font-size: 1.125rem; }
+ 		}
+	}
+}
+
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px){
+	h2 { font-size: 1.125rem; text-align: center;}
+	h4, p { font-size: 0.875rem; }
+
+	.header-nav {
+		background: url(../img/mobile_header-bg.png) no-repeat;
+		background-size: 100% 100%;
+		box-shadow: none;
+		height: 100px;
+		.logo {
+			background: none;
+			padding-top: 5px;
+			width: auto;
+			height: auto;
+			line-height: 16px;
+			top: 0;
+			box-shadow: none;
+			img {
+				width: 77px;
+				height: 62px;
+				margin-top: 10px;
+			}
+		}
+
+		#hamburger-icon { 
+			margin-top: 12px;
+			width: 40px;
+			height: 24px;
+		}
+		#hamburger-icon.open {
+			width: 40px;
+			height: 24px;
+		}
+		
+		.main-nav {
+			width: 100%;
+			padding-top: 100px;
+			.nav-link { margin-bottom: 60px !important; }
+		}
+	}
+
+	.art1 {
+		padding-top: 190px;
+		padding-bottom: 0;
+		.art-wrapper{
+			padding: 20px 15px 45px;
+			p { text-align: left;}
+			.art1-btn { display: block; }
+		}
+	}
+
+	.art2-slider img {
+		width: 100%;
+		max-height: 350px;
+		border-radius: 5px;
+	}
+
+	.nav-food h2 {
+		background: #fff;
+		height: 70px;
+		padding-top: 30px;
+	}
+
+	.food-slider {
+		margin-top: 0;
+		.slick-list { height: 45px !important; margin: 0 30px !important; }
+		.slick-slide {
+			padding: 5px !important;
+			h4 { height: 45px !important;}
+			img { display: none;}
+		}
+	}
+	.nav-food .food-content {
+		margin: 0;
+		padding: 0 5px 90px;
+		background: #fff;
+		img { display: none; }
+		ul {
+			height: auto;
+			overflow: visible;
+			li {
+				margin-bottom: 0px !important;
+				padding: 10px 50px 10px 0;
+				border-bottom: 1px solid #f4ecd6;
+				.food-title { padding-left: 20px; font-size: 1rem; }
+				.food-text { padding-left: 20px; font-size: 0.75rem; }
+			}
+		}
+		.food-title::after { display: block; }
+	}
+
+	.art3 {
+		padding-top: 190px;
+		padding-bottom: 70px;
+		.art-wrapper { padding-bottom: 70px; }
+	}
+
+	.footer {
+		.flex { flex-direction: column; }
+		.footer-address { max-width: 100%; }
+		.footer-phone {
+			text-align: left;
+			.phone-marker { left: 0;}
+		}
+	}
+}
+
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px){
+	.art2-slider img {
+		width: 238px;
+		height: 238px;
+		border-radius: 5px;
+	}
+
+	.food-slider {
+		.slick-slide { height: auto !important;	}
+	}
+
+	.footer {
+		.footer-address,
+	 	.footer-phone,
+	 	.footer-social {
+	 		p, a { font-size: 0.875rem; }
+	 	}
+	 	.footer-social .fb { top: 0; }
+	}
+}
+
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px){
+	/**/
+}
+
