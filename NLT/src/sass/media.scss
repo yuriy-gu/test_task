@@ -164,7 +164,7 @@
 				padding: 10px 50px 10px 0;
 				border-bottom: 1px solid #f4ecd6;
 				.food-title { padding-left: 20px; font-size: 1rem; }
-				.food-text { padding-left: 20px; font-size: 0.75rem; }
+				.food-text { padding-left: 20px; font-size: 0.75rem; display: none; }
 			}
 		}
 		.food-title::after { display: block; }
@@ -189,10 +189,12 @@
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px){
-	.art2-slider img {
-		width: 238px;
+	//.slick-track { padding-left: -80px !important;}
+	.slick-slide { width: 310px !important; margin: 0 10px; }
+	.art2 .slick-slide img {
+		width: 290px;
 		height: 238px;
-		border-radius: 5px;
+		border-radius: 10px;
 	}
 
 	.food-slider {

@@ -1,0 +1,45 @@
+.sect2 {
+  .section-button { background: $section-button-color2; }
+}
+
+.sect2__content-item {
+  padding: 0 15px;
+  width: 185px;
+  transition: .5s ease;
+  margin-bottom: 75px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-25px);
+  &-on { opacity: 1; transform: translateY(0); }
+  &:hover { transform: translateY(-30px); }
+  &:hover .sect2-item_text { color: $main-color; }
+}
+
+.sect2-item_img {
+  padding-bottom: 32px;
+  margin-bottom: 12px;
+  display: block;
+  position: relative;
+  line-height: 60px;
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,0);
+    height: 1px;
+    width: 58px;
+    background-color: #F39F18;
+  }
+  img {
+    width: 75px;
+    height: 60px;
+  }
+}
+
+.sect2-item_text {
+  font-size: .875em;
+  line-height: 1.25em;
+  color: #000;
+  font-family: 'RalewayBold';
+}

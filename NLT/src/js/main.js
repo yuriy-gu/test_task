@@ -33,7 +33,8 @@ $(document).ready(function(){
 	  			slidesToShow: 1,
 	  			slidesToScroll: 1,
 	  			centerMode: true,
-	  			centerPadding: '20px',
+	  			centerPadding: '45px',
+                      dots: false,
 	  			}
 	  		}
   	]
@@ -76,9 +77,9 @@ $(document).ready(function(){
   // })
 
   //food-text show/hide
-  var allPanels = $('.food-text').hide();
+  // var allPanels = $('.food-text').hide();
   $('.food-title').click(function(){
-  	allPanels.slideUp().parent().removeClass('food-list-on');
+  	$('.food-text').slideUp().parent().removeClass('food-list-on');
   	$(this).siblings('.food-text').slideDown().parent().addClass('food-list-on');;
     return false;
   });
