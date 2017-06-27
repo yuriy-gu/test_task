@@ -1,111 +1,158 @@
-var gulp           = require('gulp'),
-      gutil          = require('gulp-util' ),
-      sass           = require('gulp-sass'),
-      browserSync    = require('browser-sync'),
-      concat         = require('gulp-concat'),
-      uglify         = require('gulp-uglify'),
-      cleanCSS       = require('gulp-clean-css'),
-      rename         = require('gulp-rename'),
-      del            = require('del'),
-      imagemin       = require('gulp-imagemin'),
-      cache          = require('gulp-cache'),
-      autoprefixer   = require('gulp-autoprefixer'),
-      bourbon        = require('node-bourbon'),
-      ftp            = require('vinyl-ftp'),
-      notify         = require("gulp-notify");
+'use strict';
+var gulp          = require('gulp'),
+    watch         = require('gulp-watch'),
+    prefixer      = require('gulp-autoprefixer'),
+    uglify        = require('gulp-uglify'),
+    sass          = require('gulp-sass'),
+    sourcemaps    = require('gulp-sourcemaps'),
+    rigger        = require('gulp-rigger'),
+    cssmin        = require('gulp-minify-css'),
+    imagemin      = require('gulp-imagemin'),
+    pngquant      = require('imagemin-pngquant'),
+    rimraf        = require('rimraf'),
+    browserSync   = require("browser-sync"),
+    reload        = browserSync.reload;
 
-// Скрипты проекта
-gulp.task('scripts', function() {
-  return gulp.src([
-    'app/libs/jquery/jquery.min.js',
-    'app/libs/waypoints/waypoints.min.js',
-    'app/libs/modernizr/modernizr.js',
-    'app/libs/drawsvg/drawfillsvg.min.js',
-    'app/libs/animate/animate-css.js',
-    'app/libs/Magnific-Popup/jquery.magnific-popup.min.js',
-    'app/libs/owl/owl.carousel.min.js',
-    'app/js/common.js', // Всегда в конце
-    ])
-  .pipe(concat('scripts.min.js'))
-  .pipe(uglify())
-  .pipe(gulp.dest('app/js'))
-  .pipe(browserSync.reload({stream: true}));
-});
 
-gulp.task('browser-sync', function() {
-  browserSync({
-    server: {
-      baseDir: 'app'
+
+
+var path = {
+    build: { //Тут мы укажем куда складывать готовые после сборки файлы
+        html: 'build/',
+        js: 'build/js/',
+        css: 'build/css/',
+        img: 'build/img/',
+        fonts: 'build/fonts/',
+        libs: 'build/libs/'
     },
-    notify: false
-  });
+    src: { //Пути откуда брать исходники
+        html: 'src/*.html', //Синтаксис src/*.html говорит gulp что мы хотим взять все файлы с расширением .html
+        js: 'src/js/main.js',//В стилях и скриптах нам понадобятся только main файлы
+        sass: 'src/sass/main.scss',
+        img: 'src/img/**/*.*', //Синтаксис img/**/*.* означает - взять все файлы всех расширений из папки и из вложенных каталогов
+        fonts: 'src/fonts/**/*.*',
+        libs: 'src/sass/libs/**/*.*'
+    },
+    watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
+        html: 'src/**/*.html',
+        js: 'src/js/**/*',
+        sass: 'src/sass/**/*',
+        img: 'src/img/**/*.*',
+        fonts: 'src/fonts/**/*.*',
+        libs: 'src/sass/libs/**/*.*'
+    },
+    clean: './build'
+};
+
+//web-server config
+var config = {
+    server: {
+      baseDir: "./build"
+    },
+    host: 'localhost',
+    port: 2000,
+    tunnel: false,
+    open: true,
+    logConnections: true,
+    online: true
+};
+
+//Собираем html
+gulp.task('html:build', function () {
+    gulp.src(path.src.html) //Выберем файлы по нужному пути
+        .pipe(rigger()) //Прогоним через rigger
+        .pipe(gulp.dest(path.build.html)) //Выплюнем их в папку build
+        .pipe(reload({stream: true})); //И перезагрузим наш сервер для обновлений
 });
 
-gulp.task('scss', function() {
-  return gulp.src('app/sass/**/*.scss')
-  .pipe(sass({
-    includePaths: bourbon.includePaths
-  }).on("error", notify.onError()))
-  .pipe(rename({suffix: '.min', prefix : ''}))
-  .pipe(autoprefixer(['last 15 versions']))
-  .pipe(cleanCSS())
-  .pipe(gulp.dest('app/css'))
-  .pipe(browserSync.reload({stream: true}));
+//Собираем js
+gulp.task('js:build', function () {
+    gulp.src(path.src.js) //Найдем наш main файл
+        .pipe(rigger()) //Прогоним через rigger
+        .pipe(sourcemaps.init()) //Инициализируем sourcemap
+        .pipe(uglify()) //Сожмем наш js
+        .pipe(sourcemaps.write()) //Пропишем карты
+        .pipe(gulp.dest(path.build.js)) //Выплюнем готовый файл в build
+        .pipe(reload({stream: true})); //И перезагрузим сервер
 });
 
-gulp.task('watch', ['scss', 'scripts', 'browser-sync'], function() {
-  gulp.watch('app/sass/**/*.scss', ['scss']);
-  gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['scripts']);
-  gulp.watch('app/*.html', browserSync.reload);
+//сборка SCSS:
+gulp.task('sass:build', function () {
+    gulp.src(path.src.sass) //Выберем наш main.scss
+        .pipe(sourcemaps.init()) //То же самое что и с js
+        .pipe(sass()) //Скомпилируем
+        .pipe(prefixer()) //Добавим вендорные префиксы
+        .pipe(cssmin()) //Сожмем
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(path.build.css)) //И в build
+        .pipe(reload({stream: true}));
 });
 
-gulp.task('imagemin', function() {
-  return gulp.src('app/img/**/*')
-  .pipe(cache(imagemin()))
-  .pipe(gulp.dest('dist/img')); 
+//Собираем картинки
+gulp.task('image:build', function () {
+    gulp.src(path.src.img) //Выберем наши картинки
+        .pipe(imagemin({ //Сожмем их
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()],
+            interlaced: true
+        }))
+        .pipe(gulp.dest(path.build.img)) //И бросим в build
+        .pipe(reload({stream: true}));
 });
 
-gulp.task('build', ['removedist', 'imagemin', 'scss', 'scripts'], function() {
-
-  var buildFiles = gulp.src([
-    'app/*.html',
-    'app/.htaccess'
-    ]).pipe(gulp.dest('dist'));
-
-  var buildCss = gulp.src([
-    'app/css/main.min.css',
-    ]).pipe(gulp.dest('dist/css'));
-
-  var buildJs = gulp.src([
-    'app/js/scripts.min.js'
-    ]).pipe(gulp.dest('dist/js'));
-
-  var buildFonts = gulp.src([
-    'app/fonts/**/*']
-    ).pipe(gulp.dest('dist/fonts'));
-
+//Шрифты
+gulp.task('fonts:build', function() {
+    gulp.src(path.src.fonts)
+        .pipe(gulp.dest(path.build.fonts))
 });
 
-gulp.task('deploy', function() {
-
-  var conn = ftp.create({
-    host:      'hostname.com',
-    user:      'username',
-    password:  'userpassword',
-    parallel:  10,
-    log: gutil.log
-  });
-
-  var globs = [
-  'dist/**',
-  'dist/.htaccess',
-  ];
-  return gulp.src(globs, {buffer: false})
-  .pipe(conn.dest('/path/to/folder/on/server'));
-
+//библиотеки
+gulp.task('libs:build', function() {
+    gulp.src(path.src.libs)
+        .pipe(gulp.dest(path.build.libs))
 });
 
-gulp.task('removedist', function() { return del.sync('dist'); });
-gulp.task('clearcache', function () { return cache.clearAll(); });
+//определим таск с именем «build», который будет запускать все
+gulp.task('build', [
+    'html:build',
+    'js:build',
+    'sass:build',
+    'fonts:build',
+    'image:build',
+    'libs:build'
+]);
 
-gulp.task('default', ['watch']);
+//Изменения файлов
+gulp.task('watch', function(){
+    watch([path.watch.html], function(event, cb) {
+        gulp.start('html:build');
+    });
+    watch([path.watch.sass], function(event, cb) {
+        gulp.start('sass:build');
+    });
+    watch([path.watch.js], function(event, cb) {
+        gulp.start('js:build');
+    });
+    watch([path.watch.img], function(event, cb) {
+        gulp.start('image:build');
+    });
+    watch([path.watch.fonts], function(event, cb) {
+        gulp.start('fonts:build');
+    });
+    watch([path.watch.libs], function(event, cb) {
+        gulp.start('libs:build');
+    });
+});
+
+gulp.task('webserver', function () {
+    browserSync(config);
+});
+
+//Если вы добавите какую-нибудь картинку, потом запустите задачу image:build и
+//потом картинку удалите — она останется в папке build. Так что было бы удобно — периодически подчищать ее.
+gulp.task('clean', function (cb) {
+    rimraf(path.clean, cb);
+});
+
+gulp.task('default', ['build', 'webserver', 'watch']);
