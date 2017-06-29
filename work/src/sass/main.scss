@@ -5,7 +5,6 @@ button,input,input:focus,input:hover,input:active,textarea,textarea:focus,textar
 
 /* =========================     VARIABLES      ==============================*/
 $files: '../img/';
-
 $container-padding: 25px;
 $main-text_color: #fffaeb;
 $text-color2: #42100c;
@@ -95,6 +94,8 @@ p {
 	.slick-list:focus, .slick-track:focus, .slick-slide:focus { outline: none;}
 	.slick-list { overflow: hidden; }
 	.slick-slide { float: left; cursor: pointer;}
+
+	//slider arrows
 	.slick-arrow {
 		width: 35px;
 		height: 68px;
@@ -106,7 +107,6 @@ p {
 		transition: all .5s;
 		&:hover { opacity: 1; }
 	}
-	//slider arrows
 	.slick-prev { left: -5%; }
 	.slick-next { right: -5%; transform: rotate(180deg); }
 
@@ -162,67 +162,6 @@ p {
 	top: 5px;
 }
 
-// scroll styles
-
-
-/* scroll bg */
-.scrollbar-rail > .scroll-element { background-color: transparent; }
-
-.scrollbar-rail > .scroll-element div {
-display: block;
-height: 100%;
-left: 0;
-top: 0;
-width: 100%;
-}
-
-.scrollbar-rail > .scroll-element .scroll-element_size {
-background-color: #daceb9;
-}
-.scrollbar-rail > .scroll-element .scroll-element_outer:hover .scroll-element_size {
-background-color: red;
-}
-
-.scrollbar-rail > .scroll-element.scroll-y {
-height: 100%;
-min-height: 100%;
-padding: 0 2px 0 3px;
-right: 0;
-top: 0;
-width: 12px;
-}
-
-.scrollbar-rail > .scroll-element .scroll-bar {
-background-color: #42100c;
-border-radius: 5px;
-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-.scrollbar-rail > .scroll-element .scroll-element_outer:hover .scroll-bar {
-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-}
-
-/* scrollbar height/width & offset from container borders */
-
-.scrollbar-rail > .scroll-content.scroll-scrolly_visible { left: -17px; margin-left: 17px; }
-.scrollbar-rail > .scroll-content.scroll-scrollx_visible { margin-top: 17px; top: -17px; }
-
-.scrollbar-rail > .scroll-element.scroll-x .scroll-bar { height: 10px; min-width: 10px; top: 1px; }
-.scrollbar-rail > .scroll-element.scroll-y .scroll-bar { left: 1px; min-height: 10px; width: 10px; }
-
-.scrollbar-rail > .scroll-element.scroll-x .scroll-element_outer { height: 15px; left: 5px; }
-.scrollbar-rail > .scroll-element.scroll-x .scroll-element_size { height: 2px; left: -10px; top: 5px; }
-
-.scrollbar-rail > .scroll-element.scroll-y .scroll-element_outer { top: 5px; width: 15px; }
-.scrollbar-rail > .scroll-element.scroll-y .scroll-element_size { left: 5px; top: -10px; width: 2px; }
-
-/* update scrollbar offset if both scrolls are visible */
-
-.scrollbar-rail > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_size { left: -25px; }
-.scrollbar-rail > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_size { top: -25px; }
-
-.scrollbar-rail > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_track { left: -25px; }
-.scrollbar-rail > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_track { top: -25px; }
 
 
 /* =======================     HEADER      ======================*/
@@ -258,27 +197,23 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 
 /* ====================     HEADER-NAV      ======================*/
 .header-nav {
-	background: url('#{$files}header_bg.jpg') no-repeat center;
+	background: url('#{$files}header_circle_bg.png') no-repeat center;
 	background-size: cover;
-	height: 80px;
 	width: 100%;
-	line-height: 80px;
+	height: 245px;
+	line-height: 245px;
 	position: absolute;
-	top: 96px;
+	top: 0;
 	left: 0;
-	z-index: 10;
-	box-shadow: 0px -2px 15px #000;
+	z-index: 1;
 
 	.logo {
-    background: url(../img/circle.png) no-repeat;
-    background-size: cover;
-    box-shadow: 0 -10px 10px -5px #000;
     position: relative;
-    top: -79px;
-    float: left;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 245px;
     height: 245px;
-    border-radius: 500px;
 		a {
 			background: url('#{$files}logo.png') no-repeat;
 			background-size: cover;
@@ -332,10 +267,10 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
  	#hamburger-icon {
  		display: none;
  		width: 60px;
- 		height: 45px;
- 		position: relative;
- 		margin: 30px 10px;
- 		transform: rotate(0deg);
+ 		height: 50px;
+ 		position: absolute;
+ 		top: 46%;
+ 		left: 15px;
  		transition: .5s ease-in-out;
  		cursor: pointer;
  		&:focus { outline: none; }
@@ -400,10 +335,9 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 	h2,	p { color: $text-color2; }
 	.slick-slide {
 		img {
-			max-width: 1170px;
-			max-height: 723px;
-			width: 100%;
-			height: 100%;
+			width: 1170px;
+			height: 723px;
+
 		}
 	}
 }
@@ -413,8 +347,6 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 /* ======================     NAV-FOOD      ===========================*/
 .nav-food {
 	margin-top: 33px;
-	margin-left: -5px;
-	overflow: hidden;
 
 	h2 { color: $text-color2; }
 	.nav-food_bg {
@@ -424,7 +356,6 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 
 	.food-slider {
 		text-align: center;
-
 		.food-active {
 			border-left: 2px solid #fff;
 			border-right: 2px solid #fff;
@@ -452,26 +383,20 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 		.slick-prev { left: 4px; }
 	}
 
-	//food-description
-	.body_content {
-	  position: relative;
-	  margin-top: 50px;
-	  padding: 20px;
-	  padding-right: 43px;
-	  max-height: 200px;
-	  background: #ddd;
-	}
 	/* color of scroll bar */
-	.mCS-my-theme.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar { background-color: #42100c; }
+	.mCS-my-theme.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,{
+		background-color: #42100c;
+		&:hover,
+  		&:active { background:  #42100c; }
+	}
 	/* color of scroll bar bg */
-	.mCS-my-theme.mCSB_scrollTools .mCSB_draggerRail { background-color: #daceb9; }
+	.mCS-my-theme.mCSB_scrollTools .mCSB_draggerRail { background-color: #daceb9; width: 5px; }
 	/* heaight of scrollbar bg */
-	#mCSB_1_scrollbar_vertical { height: 200px; }
+	#mCSB_1_scrollbar_vertical { height: 450px; top: 50%; transform: translateY(-50%); }
 	/* width of scroll bar */
 	#mCSB_1_scrollbar_vertical .mCSB_dragger_bar { width: 8px; }
 
-
-
+	//food-description
 	.food-content {
 		max-width: 1255px;
 		margin: auto;
@@ -479,11 +404,12 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 		display: none;
 		margin-top: 52px;
 		img { float: left; margin-right: 42px; }
-		.scroll-style {
+		.scroll-wrapper {
 			height: 500px;
-			overflow-y: scroll; 
+			color: $text-color2;			
+		}
+		.scroll-style {
 			padding-right: 43px;
-			color: $text-color2;
 			.food-title {
 				position: relative;
 				font-size: 1.5rem;
@@ -517,7 +443,6 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 			}
 		}
 	}
-
 	.food-on { display: block; }
 	
 }
