@@ -10,60 +10,43 @@
 	.header .top-line p { font-size: 1.25rem; }
 
 	.sect2 {
-		h2, p { padding: 0 15px; }
+		h2, p { padding: 0 $container-indent; }
 	}
 
-	.nav-food h2 { padding: 0 15px; }
+	.nav-food h2 { padding: 0 $container-indent; }
 
 	.footer {
-		padding-left: 15px;
-		padding-right: 15px;
+		padding-left: $container-indent;
+		padding-right: $container-indent;
 	}
 }
 
 
 /* Medium Devices, Desktops */
 @media only screen and (max-width : 992px){
-	.header { display: none; }
 
 	.header-nav {
-		top: -90px;
-		line-height: 16px;
+		padding-top: 28px;
 		.logo {
-			top: 90px;
-			width: 150px;
-			height: 150px;
+			width: 175px;
+			height: 175px;
+			padding: 10px 0 0 10px;
+			margin-left: -85px;
+			margin-top: -75px;
 			a {
-				width: 90px;
-				height: 70px;
-				.circle {
-					width: 124px;
-					height: 124px;
-				}
+				width: 155px;
+				height: 155px;
+				background-size: 120px 100px;
+				background-position: center 15px;
 			}
 		}
 
-		#hamburger-icon { display: inline-block;}
-
 		.main-nav {
- 			position: absolute;
- 			top: 90px;
- 			left: -2000px;
-			padding-top: 70px;
-			padding-bottom: 20px;
-			width: 250px;
-			height: 100vh;
-			z-index: 1;
-			transition: .3s ease-out;
-			.left-mnu,
-			.right-mnu {
-				float: none;
-				width: 100%;
-			}
-			.nav-link {
-				font-size: 1.125rem;
-				padding: 20px 15px;
-				display: block;
+			.left-mnu { padding-right: 90px; }
+			.right-mnu { padding-left: 90px; }
+			.nav-link { 
+				font-size: 1.25rem;
+				a { padding: 0 15px; }
 			}
 		}
 	}
@@ -77,12 +60,16 @@
 
 	.food-slider button { display: none; }
 
+	.food-content_wrapper {
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
 	.nav-food .food-content {
-		padding: 0 15px;
+		padding-left: 0px;
+		.scroll-style { padding-right: 0; }
 		img {
-			float: none;
-			margin-bottom: 15px;
-			width: 100%;
+			width: 50%;
+			margin-right: 15px;
 		}
 	}
 
@@ -103,24 +90,56 @@
 	h2 { font-size: 1.125rem; text-align: center;}
 	h4, p { font-size: 0.875rem; }
 
-	.header-nav {
+	.header {
+		.top-line { display: none; }
+
+		.header-nav {
+			padding-top: 0;
+			margin-top: 0;
+			height: 50px;
+		}
+
+		.logo-wrap {
+			float: none;
+			width: 100%;
+			text-align: center;
+			margin-top: -100px;
+		}
 		.logo {
-			img {
-				width: 77px;
-				height: 62px;
-				margin-top: 10px;
+			display: inline-block;
+			margin: 0;
+			padding: 60px 0 0;
+			a {
+				border: none;
+				background-size: 90px 70px;
 			}
 		}
 
-		#hamburger-icon,
-		#hamburger-icon.open {
-			width: 40px;
-			height: 24px;
-		}
-		
+		#hamburger-icon { display: inline-block; }
+
 		.main-nav {
-			width: 100%;
+			background: rgba(0,0,0,.7);
+			height: 100vh;
+			width: 100vw;
 			padding-top: 100px;
+			position: absolute;
+    		top: 0;
+    		left: -2000px;
+    		transition: .5s ease-out;
+			.left-mnu,
+			.right-mnu {
+				float: none;
+				width: 100%;
+				padding: 0;
+			}
+			.nav-link {
+				width: 100%;
+				margin-bottom: 15px;
+				a {
+					padding: 15px;
+					&::before { display: none; }
+				}
+			}
 		}
 	}
 
@@ -134,8 +153,7 @@
 		}
 	}
 
-	.sect2-slider img {
-		width: 100%;
+	.sect2 .slick-slide img {
 		max-height: 350px;
 		border-radius: 5px;
 	}
@@ -155,18 +173,33 @@
 			img { display: none;}
 		}
 	}
+	.food-content_wrapper {
+		margin: 0 !important;
+	}
 	.nav-food .food-content {
-		margin: 0;
-		padding: 10px 10px 90px;
 		background: #fff;
 		img { display: none; }
-		.food-title { font-size: 1rem; }
-		.food-text { font-size: 0.75rem; display: none; }
+		.scroll-wrapper {
+			position: relative;
+			padding-bottom: 95px;
+			width: 100%;
+		}
+		.scroll-style {
+			padding: 0;
+			.food-title {
+				font-size: 1rem;
+				padding: 15px 15px 7px;
+				border-bottom: 1px solid #f4ecd6;
+				.food-arrow { display: block; }
+			}
+			.food-text { font-size: 0.75rem; display: none; padding: 0 15px; margin-bottom: 0;}
+			.dotted { display: none; }
+		}
 	}
 
 	.sect3 {
 		padding-top: 190px;
-		padding-bottom: 70px;
+		padding-bottom: 60px;
 		.art-wrapper { padding-bottom: 70px; }
 	}
 
@@ -183,14 +216,17 @@
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px){
-	.slick-list{ padding:0 20% 0 0 !important; }
-	.sect2 .slick-slide img {
-		width: 300px;
-		height: 238px;
-		border-radius: 10px;
+	.sect2 {
+		.slick-list{ padding:0 20% 0 0 !important; }
+		.slick-slide img {
+			max-width: 300px;
+			max-height: 238px;
+			border-radius: 10px;
+		}		
 	}
 
 	.food-slider {
+		.slick-list { height: 60px !important; }
 		.slick-slide { height: auto !important;	}
 	}
 

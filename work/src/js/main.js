@@ -1,5 +1,15 @@
 $(document).ready(function(){
 
+	//link animation to anchor
+	$("a[href*='#']").on("click", function (e) {
+    var anchor = $(this);
+    $('html, body').stop().animate({
+      scrollTop: $(anchor.attr('href')).offset().top
+    }, 777);
+    e.preventDefault();
+    return false;
+   });
+
 	//icon-hamberger
 	$('#hamburger-icon').click(function(){
 		$(this).toggleClass('open');
@@ -18,7 +28,14 @@ $(document).ready(function(){
 		// autoplaySpeed: 4000,
 		nextArrow: '<button type="button" class="slick-next"></button>',
 		prevArrow: '<button type="button" class="slick-prev"></button>',
-		responsive: [ 
+		adaptiveHeight: true,
+		responsive: [
+				{
+			breakpoint: 992,
+			settings: {
+				arrows: false
+			}
+		},
 		{
 			breakpoint: 768,
 			settings: {
@@ -36,6 +53,7 @@ $(document).ready(function(){
 				centerMode: true,
 				centerPadding: '55px',
 				dots: false,
+				arrows: false
 			}
 		}
 		]
@@ -72,21 +90,38 @@ $(document).ready(function(){
 		$('.food-content').eq($(this).data('item')).fadeIn().siblings('.food-content').fadeOut()
 	})
 
-	// $('.food-title').click(function(){
-	//  $(this).siblings('.food-text').fadeToggle();
-	// })
+  $(window).resize(function(){
+    var windowWidth = $(window).width();
+    if(windowWidth <= 768) {
+			$('.food-title').addClass('food-title-show').removeClass('food-title-on');
+			$('.food-text').css({'display': 'none'});
+    } else {
+    	$('.food-title').removeClass('food-title-show');
+    	$('.food-text').css({'display': 'block'});
+    }
+		//food scrollbar
+  	if($(this).width()>768){
+			$(".scroll").mCustomScrollbar({
+				theme: "my-theme",
+				scrollButtons: {enable:false}
+			});     
+      } else{
+        $("#food-scroll").mCustomScrollbar("destroy"); //destroy scrollbar 
+      }
+  });
+
+	
+	
+    $(window).resize(function(){
+    }).trigger("resize");
+	
 
 	//food-text show/hide
-	$('.food-title').click(function(){
-		$('.food-text').slideUp().parent().removeClass('food-list-on');
-		$(this).siblings('.food-text').slideDown().parent().addClass('food-list-on');;
+	$('body').on('click', '.food-title-show', function(){
+		$('.food-text').slideUp().removeClass('food-title-on').prev().removeClass('food-title-on');
+		$(this).next('.food-text').slideDown().addClass('food-title-on').prev().addClass('food-title-on');
 		return false;
 	});
 
-	//food scrollbar
-	$("#food-scroll").mCustomScrollbar({
-    		theme: "my-theme",
-    		scrollButtons: {enable:false}
-  	});
 });
 
